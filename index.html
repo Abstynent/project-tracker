@@ -16,11 +16,17 @@
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
+    <!-- DayJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body class="">
     <!-- NAV BAR -->
-    <nav class="navbar bg-light px-1">
+    <nav class="navbar bg-light">
         <div class="float-left col-10">
             <button type="button" class="btn btn-primary" disabled>Welcome!</button>
             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#instructions-modal">Instructions</button>
@@ -51,16 +57,16 @@
                       <h5 class="modal-title">Add project</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body d-grid">
                         <form>
                             <div class="form-group">
                               <label for="input-project-name">Name of the project:</label>
-                              <input type="text" class="form-control" id="input-project-name" placeholder="Enter name of the project" minlength="4">
+                              <input type="text" class="form-control" name="input-project-name" placeholder="Enter name of the project" minlength="4">
                             </div>
 
                             <div class="form-group">
                                 <label for="select-project-type">Type of project:</label>
-                                <select name="select-project-type" class="form-control" id="select-project-type">
+                                <select name="select-project-type" class="form-control">
                                   <option value="1">1</option>
                                   <option value="2">2</option>
                                   <option value="3">3</option>
@@ -70,27 +76,27 @@
 
                             <div class="form-group">
                                 <label for="select-date">Select date project is due:</label>
-                                <input type="text" class="form-control" id="datepicker" autocomplete="off"/>
+                                <input name="select-due-date" type="text" class="form-control" id="datepicker" autocomplete="off"/>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                            <button type="submit" class="btn btn-primary col-12 mt-2" data-bs-dismiss="modal">Submit</button>
                           </form>
                     </div>
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
 
         </div>
-        <div class="d-flex justify-content-end col-2">
-            <button type="button" class="btn btn-outline-secondary" disabled>Time: <span id="current-time">15:47:32</span></button>
+        <div class="d-flex justify-content-end align-items-center text-nowrap col-2">
+            <p id="current-time"></p>
         </div>
     </nav> <!--- END OF NAV -->
 
     <!-- MAIN CONTENT -->
     <main class="">
-        <div class="container col-6 d-flex align-items-center justify-content-center">
+        <div class="container col-sm-12 col-lg-6 d-flex align-items-center justify-content-center">
 
             <!-- TABLE -->
             <table class="table text-center" id="project-table">
