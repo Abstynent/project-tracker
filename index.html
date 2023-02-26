@@ -22,11 +22,10 @@
       integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body class="">
     <!-- NAV BAR -->
-    <nav class="navbar bg-light">
+    <nav class="navbar bg-light p-2">
         <div class="float-left col-10">
             <button type="button" class="btn btn-primary" disabled>Welcome!</button>
             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#instructions-modal">Instructions</button>
@@ -59,7 +58,7 @@
                     </div>
                     <div class="modal-body d-grid">
                         <form>
-                            <div class="form-group">
+                            <div class="form-group" id="add-project">
                               <label for="input-project-name">Name of the project:</label>
                               <input type="text" class="form-control" name="input-project-name" placeholder="Enter name of the project" minlength="4">
                             </div>

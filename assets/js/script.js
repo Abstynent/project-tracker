@@ -1,4 +1,3 @@
-// var githubEl = $('input[name="github"]');
 var formEl = $('#user-form-modal');
 var projectNameEl = $('input[name="input-project-name"');
 var projectTypeEl = $('select[name="select-project-type"');
@@ -6,16 +5,18 @@ var projectDueDateEl = $('input[name="select-due-date"');
 var tableEl = $('#table-content');
 
 var timeEl = $('#current-time');
-var getTime = dayjs().format('ddd D, YYYY hh:mm:ss a');
+var getTime = dayjs().format('ddd D YYYY, hh:mm:ss a');
 
 var savedProjects = JSON.parse(localStorage.getItem("saved-projects"));
 
+// Interval to run in the background to display current time each second
 timeEl.text(getTime);
 var timeInterval = setInterval(function() {
-    getTime = dayjs().format('ddd D, YYYY hh:mm:ss a');
+    getTime = dayjs().format('ddd D YYYY, hh:mm:ss a');
     timeEl.text(getTime);
 }, 1000); // 1s interval
 
+// Take saved projects and render them on the page
 renderTable();
 function renderTable() {
     if(savedProjects == null) return;
@@ -41,8 +42,9 @@ function renderTable() {
     };
 
 };
+
+// add new project to the existing table
 function addTableRow(index) {
-    console.log(index);
     var tableRowEl = $('<tr data-index="' + index + '">');
     tableEl.append(tableRowEl);
 
