@@ -22,7 +22,7 @@ function renderTable() {
     // 
 
     for(var i=0; i < savedProjects.length; i++) {
-        var tableRowEl = $('<tr>');
+        var tableRowEl = $('<tr data-index="' + i + '">');
         tableEl.append(tableRowEl);
 
         for(var j=0; j < 3; j++) {
@@ -41,28 +41,56 @@ function renderTable() {
     };
 
 };
+function addTableRow(index) {
+    console.log(index);
+    var tableRowEl = $('<tr data-index="' + index + '">');
+    tableEl.append(tableRowEl);
+
+    for(var i=0; i < 3; i++) {
+        var tableRowContentEl = $('<td class="p-3">');
+        tableRowEl.append(tableRowContentEl);
+        tableRowContentEl.text(savedProjects[index][i]);
+
+        if(i===2) {
+            var removeBtnEl = $('<td>');
+            tableRowEl.append(removeBtnEl);
+            removeBtnEl.append(
+                '<button type="button" class="btn btn-outline-danger btn-small delete-item-btn">&times;</button>'
+            );
+        };
+    };
+
+};
 
 function handleFormSubmit(event) {
     event.preventDefault();
-    // console.log(projectNameEl.val());
-    // console.log(projectTypeEl.val());
-    // console.log(projectDueDateEl.val());
-    
 
     if(savedProjects == null) {
         var newItem = [[projectNameEl.val(), projectTypeEl.val(),projectDueDateEl.val()]];
         savedProjects = newItem;
+        check = 1;
     } else {
         var newItem = [projectNameEl.val(), projectTypeEl.val(),projectDueDateEl.val()];
         savedProjects.push(newItem);
     };
 
     localStorage.setItem("saved-projects", JSON.stringify(savedProjects));
-    renderTable();
+    console.log(savedProjects.length);
+    addTableRow(savedProjects.length-1);
 };
-// 
+
+function deleteItem() {
+    var index = $(this).parent().parent().data('index');
+    if(index===0) savedProjects.shift();
+    else savedProjects.splice(index,index);
+
+    localStorage.setItem("saved-projects", JSON.stringify(savedProjects));
+    savedProjects = JSON.parse(localStorage.getItem("saved-projects"));
+    $(this).parent().parent().remove();
+};
 ///////////////////////////////////
 formEl.on('submit', handleFormSubmit);
+tableEl.on('click', '.delete-item-btn', deleteItem);
 
 // 
 $(function () {
@@ -71,5 +99,3 @@ $(function () {
       changeYear: true,
     });
   });
-
-//   i am trying to do task 3, i need to save form results to localstorage using jquery somehow
